@@ -1,7 +1,534 @@
 <!DOCTYPE html>
 <html>
-    <head></head>
+    <head>
+<script>
+  
+    </script>
+<style>
+.container{
+   display: inline-flex;
+}
+pre{
+    padding: 1.1rem;
+}
+pre span{
+    font-size: 1.2rem;
+    color:blue;
+}
+.container div{
+    margin: 10px;
+}
+div h3{
+    text-align: center;
+    text-decoration: underline;
+    letter-spacing: 1px;
+}
+pre .comment{
+    color:green;
+    margin: 0px;
+}
+pre .functionCall{
+    font-size: 1rem;
+}
+.separation{
+    text-align: center;
+}
+</style>
+    </head>
     <body>
-        <div>Rajkesh</div>
-    </body>
+        
+        <!-- //https://htmlformatter.com/ -->
+        <!-- https://codebeautify.org/ -->
+        <div class="container">
+<div>
+<h3>SumOfNumbers</h3>
+<pre>
+    function <span>sumOfNumbers(n)</span> {
+    </br>
+        let sum = 0;
+        for (var i = 0; i < n; i++) {
+            sum += i;
+        }
+        return sum;
+    </br>
+    }
+    
+    <span class="functionCall">sumOfNumbers(5)</span>
+</pre>
+</div>
+
+<div>
+<h3>Anagrams</h3>
+<pre>
+    function <span>Anagrams(str1, str2)</span> {
+    </br>
+        var objStr1 = {};
+        var objStr2 = {};
+        if (str1.length !== str2.length) {
+            return false
+        };
+        for (var x of str1) {
+            objStr1[x] = (objStr1[x] || 0) + 1;
+        }
+        for (var y of str2) {
+            objStr2[y] = (objStr2[y] || 0) + 1;
+        }
+        console.log(objStr1, objStr2);
+        for (var z in objStr1) {
+            <div class="comment">//check the key in both object wether theya re present or not</div>
+            if (!(z in objStr2)) {
+                return false
+            }
+            if (objStr1[z] !== objStr2[z]) {
+
+                return false
+            }
+        }
+        return true
+    </br>
+    }
+<span class="functionCall">Anagrams("textwisttime" ,"timewisttext")</span>
+<span class="functionCall">Anagrams(" ", "s")</span>
+</pre>
+</div>
+
+<div>
+<h3>AreThereDuplicates</h3>
+<pre>
+function <span>areThereDuplicates(...args)</span> {
+</br>
+    var obj = {}
+    for (var a of args) {
+        obj[a] = (obj[a] || 0) + 1;
+    }
+    console.log(obj)
+    for (var b in obj) {
+        if (obj[b] > 1) {
+            return true;
+        }
+    }
+    return false;
+</br>
+}
+<span class="functionCall">areThereDuplicates(1,2,3);</span>
+<span class="functionCall">areThereDuplicates('a', 'b', 'c', 'a');</span>
+
+<div class="separation">-------</div>
+function <span>areThereDuplicates(...args)</span> {
+</br>
+    
+    args.sort((a, b) => a > b);
+    let start = 0;
+    let next = 1;
+    while (next < args.length) {
+        if (args[start] === args[next]) {
+            return true
+        }
+        start++
+        next++
+    }
+    return false
+</br>
+}
+<div class="separation">-------</div>
+
+function <span>areThereDuplicates()</span> {
+</br>
+    return new Set(arguments).size !== arguments.length;
+</br>
+}  
+</pre>
+</div>
+
+
+<div>
+<h3>CountUniqueValues</h3>
+<pre>
+<div class="comment">// Approach of CountUniqueValues, frequenct counter pattern</div>
+function <span>countUniqueValue(sortedArray = [1, 1, 2])</span> {
+<br/>
+var obj = {}
+for (var i = 0; i < sortedArray.length; i++) {
+    obj[sortedArray[i]] = (obj[sortedArray[i]] || 0) + 1;
+}
+console.log(obj);
+return Object.keys(obj).length
+<br/>
+} 
+<span class="functionCall">countUniqueValue([-2, -1, -1, 0, 1])</span>
+
+<div class="comment">//Naive Approach of CountUniqueValues</div>
+
+function <span>countUniqueValue(sortedArray = [1, 1, 2])</span> {
+    <br/>
+    var diff;
+    var array = [];
+    debugger;
+    for (var i = 0; i < 1; i++) {
+        for (var j = i; j < sortedArray.length; j++) {
+            diff = sortedArray[j] - sortedArray[i]
+            if (array.indexOf(diff) === -1) {
+                array.push(diff)
+            }
+        }
+    }
+    return array.length;
+    <br/>
+}
+<div class="comment">// countUniqueValue([1,2,3,4,4,4,7,7,12,12,13])</div>
+<span class="functionCall">countUniqueValue([-2, -1, -1, 0, 1])</span>
+
+<div class="separation">-------</div>
+function <span>countUniqueValues(sortedArray = [1, 1, 2])</span> {
+    <br/>
+    var i = 0;
+    var j = i + 1;
+
+    while (j !== sortedArray.length) {
+
+        if (sortedArray[j] - sortedArray[i] === 0) { // means they are same
+            j++;
+        } else if (sortedArray[j] - sortedArray[i] > 0) {
+            i++;
+            sortedArray[i] = sortedArray[j];
+            j++;
+        }
+    }
+    console.log("sortedArray", sortedArray);
+
+    return i + 1;
+    <br/>
+}
+<div class="comment">// countUniqueValues([-2,-1,-1,0,1])</div>
+<span class="functionCall">countUniqueValues([1, 2, 3, 4, 4, 4, 7, 7, 12, 12, 13])</span>
+</pre>
+</div>
+
+<div>
+<h3>factorialIterative</h3>
+<pre>
+function <span>factorialIterative(n)</span> {
+<br/>
+var initialValue = 1;
+for (var i = 1; i <= n; i++) {
+    debugger;
+    initialValue = initialValue * i;
+
+}
+return initialValue
+<br/>
+} 
+<span class="functionCall">factorialIterative(5)</span>
+</pre>
+</div>
+
+
+<div>
+<h3>isPalindrome</h3>
+<pre>
+function <span>isPalindrome(s)</span> {
+<br/>
+<span>function recursive(string)</span> {
+    <br/>
+    var newString = string;
+    if (newString.length === 0) {
+        return "";
+    }
+    var lastValue = newString.substr(-1);
+    var trimmedString = newString.substr(0, (newString.length - 1));
+
+    return lastValue + recursive(trimmedString);
+    <br/>
+}
+var finallTrimmedValue = <span class="functionCall">recursive(s);</span>
+if (finallTrimmedValue === s) {
+    return true;
+}
+return false;
+<br/>
+} 
+
+<span class="functionCall">isPalindrome('awesome');</span> <div class="comment">// false</div>
+<span class="functionCall">isPalindrome('foobar');</span> <div class="comment">// false</div>
+<span class="functionCall">isPalindrome('tacocat');</span> <div class="comment">// true</div>
+<span class="functionCall">isPalindrome('amanaplanacanalpanama');</span> <div class="comment">// true</div>
+<span class="functionCall">isPalindrome('amanaplanacanalpandemonium');</span> <div class="comment">// false</div>
+
+
+</pre>
+</div>
+
+
+<div>
+<h3>IsSubsequence</h3>
+<pre>
+function <span>isSubsequence(str, str1)</span> {
+<br/>
+var i = 0;
+var j = 0;
+
+for (var k = 0; k < str1.length; k++) {
+
+    if (str[i + 1] === str1[j] && str[i] !== str1[j]) { // this condition is important 
+        return false;
+    }
+
+    if (str[i] === str1[j]) {
+
+        i++;
+        j++;
+
+    } else {
+        j++;
+    }
+
+}
+return true;
+<br/>
+} 
+<span class="functionCall">isSubsequence('hello', 'hello world');</span>
+<div class="comment">//isSubsequence('sing', 'sting');</div>
+<div class="comment">// isSubsequence('abc', 'acb');</div>
+<div class="comment">// isSubsequence('abc', 'abracadabra');</div>
+</pre>
+</div>
+
+
+
+<div>
+<h3>JavascriptChallengeQuestionInterview</h3>
+<pre>
+<div class="comment">// https://developers.google.com/web/fundamentals/primers/promises</div>  
+<span class="functionCall">console.time('AWA')</span>
+setTimeout(() => {
+    <br/>
+    var urls = [];
+
+    function <span>fetch(url)</span> {
+        <br/>
+        return new Promise(resolve => {
+            setTimeout(() => resolve(`dummy data for ${url}`), Math.random() * 4000);
+        });
+        <br/>
+    }
+    for (let i = 0; i < 100; i++) {
+
+        urls.push(`https://demo.com/design/${i+1}`);
+    }
+
+    async function fetcher() {
+
+        return Promise.all(urls.map(async(url) => await <span class="functionCall">fetch(url)</span>));
+
+    }
+
+    fetcher().then((d) => console.log(d));
+    <br/>
+}, 0)
+<span class="functionCall">console.timeEnd('AWA');</span>
+<div class="separation">-------</div>
+<div class="comment">// NEED TO UNDERSTAND</div> 
+<span class="functionCall">console.time('AWA')</span>
+var urls = [];
+function <span>fetch(url)</span> {
+    <br/>
+    return new Promise(resolve => {
+        <br/>
+        setTimeout(() => resolve(`dummy data for ${url}`), Math.random() * 4000);
+        <br/>
+    });
+    <br/>
+}
+for (let i = 0; i < 100; i++) {
+
+    urls.push(`https://demo.com/design/${i+1}`);
+}
+
+setTimeout(() => {
+    <br/>
+    async function fetcher() {
+
+        return Promise.all(urls.map(async(url) => await <span class="functionCall">fetch(url)</span>));
+
+    }
+
+    fetcher().then((d) => console.log(d));
+
+}, 0)
+<span class="functionCall">console.timeEnd('AWA');</span>
+</pre>
+</div>
+
+
+<div>
+<h3>ProductOfArray</h3>
+<pre>
+function <span>productOfArray(array)</span> {
+<br/>
+let sumProductValue = 1;
+for (var i = 0; i < array.length; i++) {
+    sumProductValue = sumProductValue * array[i]
+}
+return sumProductValue;
+<br/>
+} 
+<span class="functionCall">productOfArray([2, 3, 4, 5])</span>
+</pre>
+</div>
+
+<div>
+<h3>ProductOfArrayRecursive</h3>
+<pre>
+function <span>productOfArrayRecursive(array)</span> {
+<br/>
+if (array.length == 0) {
+    return 1;
+}
+return array[0] * productOfArrayRecursive(array.slice(1))
+<br/>
+} 
+<span class="functionCall">productOfArrayRecursive([2, 3, 4, 5])</span>
+</pre>
+</div>
+
+
+<div>
+<h3>CollectOddValues</h3>
+<pre>
+function <span>countUniqueValue(sortedArray = [1, 1, 2])</span> {
+<br/>
+let newArr = [];
+if (arr.length === 0) {
+    return [];
+}
+
+if (arr[0] % 2 !== 0) {
+    newArr.push(arr[0])
+}
+
+newArr = newArr.concat(collectOddValues(arr.slice(1)))
+return newArr;
+<br/>
+} 
+<span class="functionCall">collectOddValues([1, 2, 3, 4, 5])</span>
+</pre>
+</div>
+
+
+<div>
+<h3>SameArray</h3>
+<pre>
+<div class="comment">// writteen via for loop</div>
+function <span>Same(a1, a2)</span> {
+<br/>
+if (a1.length !== a2.lenght) {
+    return false
+}
+
+for (var i = 0; i < a1.length; i++) {
+    // 	a2.indexOf(a1[i]*a1[i]);
+    var indexValue = a2.indexOf(a1[i] ** 2);
+    if (indexValue === -1) {
+        return false;
+    }
+    a2.splice(indexValue, 1);
+}
+return true;
+<br/>
+}
+<span class="functionCall">Same([1, 2, 4, 2], [1, 4, 16, 4]);</span>
+<div class="separation">-------</div>
+<div class="comment">// writteen via while loop</div>
+function <span>Same(a1, a2)</span> {
+<br/>
+if (a1.length !== a2.length) {
+    return false
+}
+
+while (a1.length && a2.length) {
+    var indexValue = a2.indexOf(a1[0] ** 2);
+    if (indexValue === -1) {
+        return false
+    }
+    a1.shift();
+    a2.splice(indexValue, 1);
+}
+return true
+<br/>
+} 
+<span class="functionCall">Same([1, 2, 4, 2], [1, 4, 16, 4]);</span>
+<div class="separation">-------</div>
+<div class="comment">// low time complexity</div>
+<div class="comment">// frequency counter pattern</div>
+
+function <span>Same(array, arrayTwo)</span> {
+<br/>
+var frequencyOfArray = {};
+var frequencyOfArrayTwo = {};
+if (array.length !== arrayTwo.length) {
+    return false
+}
+
+for (var i = 0; i < array.length; i++) {
+    !frequencyOfArray[array[i]] ? frequencyOfArray[array[i]] = 1 : frequencyOfArray[array[i]]++;
+}
+<div class="comment">// sexy way of doing
+// for(var val of array){
+// 	frequencyOfArray[val] = (frequencyOfArray[val] || 0)+1
+
+// }</div>
+
+for (var j = 0; j < arrayTwo.length; j++) {
+    !frequencyOfArrayTwo[arrayTwo[j]] ? frequencyOfArrayTwo[arrayTwo[j]] = 1 : frequencyOfArrayTwo[arrayTwo[j]]++;
+}
+
+for (a in frequencyOfArray) {
+
+    9 in {
+            1: 1,
+            4: 2,
+            9: 1
+        } <div class="comment">// returns true , it checks the key in this object  {1:1,4:2,9:1}</div>
+    if (!(a ** 2 in frequencyOfArrayTwo)) { <div class="comment">// hasOwnProperty return trueor false , we need to have number</div>
+        console.log("i am here")
+    }
+
+    if (frequencyOfArray[a] !== frequencyOfArrayTwo[a ** 2]) {
+        return false
+    }
+
+}
+return true
+<br/>
+}
+var array = [1, 2, 3, 2];
+var arrayTwo = [9, 1, 4, 4]; 
+<span class="functionCall">Same(array, arrayTwo)</span>
+</pre>
+</div>
+
+
+
+<!-- Template  -->
+
+<div>
+<h3>CountUniqueValues</h3>
+<pre>
+function <span>countUniqueValue(sortedArray = [1, 1, 2])</span> {
+<br/>
+
+<br/>
+} 
+
+<div class="comment"></div>
+<div class="separation">-------</div>
+<span class="functionCall"></span>
+</pre>
+</div>
+
+
+
+
+</div>
+</body>
 </html>
