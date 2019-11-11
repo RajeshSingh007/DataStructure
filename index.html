@@ -509,8 +509,863 @@ var arrayTwo = [9, 1, 4, 4];
 
 
 
-<!-- Template  -->
+<div>
 
+<h3>Same</h3>
+<pre>
+<div class="comment">//Navie Approach, the spaceCompelixty is O(Nraise2)</div>
+function <span>function Same(arr1, arr2) {</span> {
+<br/>
+if (arr1.length != arr2.length) {
+    return false 
+}
+
+for (var i = 0; i < arr1.length; i++) { 
+    var currentIndex = arr2.indexOf(arr1[i] ** 2); 
+    console.log("currentIndex", currentIndex);
+    if (currentIndex === -1) {
+        return false;
+    }
+    arr2.splice(currentIndex, 1);
+}
+
+return true
+<br/>
+} 
+<div class="comment">//Same([2,3,1,9,2],[81,4,9,1,4]) //total time complexity is O(N)*O(N) = O(Nraise2);</div>
+<div class="separation">-------</div>
+<div class="comment">//refactorApproac, the space Compelixity is O(N)</div>
+
+function <span>SameRefactor(arr1, arr2)</span> {
+    <br/>
+    var arr1InObject = {}
+    var arr2InObject = {}
+
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+
+    for (var a of arr1) {
+<div class="comment"> // if(firstArrayObject[a] >= 1){
+
+        // firstArrayObject[a]++; 
+        // }
+        // else{
+
+        //firstArrayObject[a] = 1 OR
+        // if(!firstArrayObject[a]){
+        // firstArrayObject[a] = 1
+        // }OR
+        // arr1InObject[a] = (arr1InObject[a] || 1 ) 
+
+        // } OR,
+</div>
+arr1InObject[a] = (arr1InObject[a] || 0) + 1; <div class="comment">// Just a Single line, awesome</div>
+}
+for (var a of arr2) {
+    arr2InObject[a] = (arr2InObject[a] || 0) + 1;
+}
+
+console.log(arr1InObject, arr2InObject)
+
+for (var b in arr1InObject) {
+    <div class="comment">// one if condition,jo key hai arr2 ka it should be **2 time , when compare to arr1, if not return false</div>
+    console.log("b", b, arr2InObject[b ** 2]);
+
+    if (!(b ** 2 in arr2InObject)) {
+        return false
+    }
+    <div class="comment">// one more if condition , if upar wal pass, arr2 ka jo key ka value hai , that should be same as of arr1</div> 
+    if (arr1InObject[b] !== arr2InObject[b ** 2]) {
+        return false
+    }
+}
+return true
+    <br/>
+} 
+<span class="functionCall">SameRefactor([2, 3, 1, 9, 2], [81, 4, 9, 1, 4]);</span>
+</pre>
+</div>
+
+
+
+<div>
+<h3>sameFrequency</h3>
+<pre>
+function <span>sameFrequency(a, b)</span> {
+<br/>
+var aString = a.toString();
+var bString = b.toString();
+var aStringObj = {};
+var bStringObj = {};
+
+if (aString.length !== bString.length) {
+    return false
+}
+for (var i = 0; i < aString.length; i++) {
+
+    aStringObj[aString[i]] = (aStringObj[aString[i]] || 0) + 1;
+
+}
+for (var i = 0; i < bString.length; i++) {
+
+    bStringObj[bString[i]] = (bStringObj[bString[i]] || 0) + 1;
+
+}
+<div class="comment">// compare the two object;</div>
+
+for (var aStringValue in aStringObj) {
+    if (!(aStringValue in bStringObj)) {
+        return false;
+    }
+    if (aStringObj[aStringValue] !== bStringObj[aStringValue]) {
+        return false
+    }
+}
+return true
+<br/>
+} 
+<span class="functionCall">sameFrequency(182, 281);</span>
+<span class="functionCall">sameFrequency(182, 281); <div class="comment">// true</div></span>
+<span class="functionCall">sameFrequency(34, 14) <div class="comment">// true</div></span>
+<span class="functionCall">sameFrequency(3589578, 5879385) <div class="comment">// true</div></span>
+</pre>
+</div>
+
+
+
+<div>
+
+<h3>SinglyLinkedList</h3>
+<pre>
+<div class="comment">
+        //  POP AND PUSH MY UNDERSTANDING WAY AAPRAOACH 
+        //push Function in Singly inked List
+        //{val:12,next:null} // first class Node
+        // {length:0,head:null,tail:null} // Singly linked list class defination
+        //{length:0,head:{val:45,next:{val:67,next:{}}},tail:{val:"some value", next:null(alwz null)}}
+        //  POP AND PUSH MY UNDERSTANDING WAY AAPRAOACH
+        //push Function in Singly inked List
+        //{val:12,next:null} // first class Node
+        // {length:0,head:null,tail:null} // Singly linked list class defination
+        //{length:0,head:{val:45,next:{val:67,next:{}}},tail:{val:"some value", next:null(alwz null)}}
+</div>   
+class <span>Node</span>{
+    <br/>
+    constructor(val){
+        this.val = val;
+        this.next = null;
+        }
+    <br/>
+}
+
+class <span>SinglyLinkedList</span> {
+<br/>
+constructor(){
+    this.length = 0;
+    this.head = null;
+    this.tail=null;
+    }
+    
+    push(val){
+        var node = new Node(val);
+            if(this.head === null){
+                   this.head = node;
+                this.tail = node;
+                
+            }else{
+            this.tail.next = node;
+            this.tail = node;
+            }
+    this.length++;
+    }
+    <div class="comment">//It involves traversing, write a separate function which handle traversing</div>
+    pop(){
+    
+    var head = this.head;
+    var temp = null;
+    if(this.length === 1){
+    temp = this.tail;
+    this.head= null;
+    this.tail = null;
+    this.length--;
+    }
+    
+    if(this.length > 1){
+    
+    var finalValue = (()=>{while(head.next){
+    if(this.tail.val === head.next.val){
+    return head;
+    }
+    head = head.next;
+    
+    }})();
+    // return finalValue;
+    temp = finalValue.next;
+    finalValue.next = null;
+    this.tail = finalValue;
+    this.length--;
+    }
+    
+    return temp;
+    }
+    
+    remove(index){ 
+    <div class="comment">//remove from the specific postion, not the value
+    //{val:10, next: {val:11, next:{val:12,next:null} } }</div>
+    if(index === 0){this.shift()}
+    if(index >= this.length){return null;}
+    <div class="comment">//get the previous node</div>
+    var current = this.get(index-1);//i need to get the previous node
+    
+    if(current){
+    var temp = current.next;
+    current.next = temp.next;
+    
+    //special case
+    
+        if(index === this.length-1){
+        this.tail = current;
+        }
+    this.length--;
+    console.log("Node Rempved ===>")
+    }
+    
+    }
+    
+    
+    insert(index,value){
+    var newNode = new Node(value);
+    if(index === 0){this.unshift(value)}
+    if(index === this.length-1){this.push(value)}
+    <div class="comment">//Now to insert inbetween</div>
+    var current = this.get(index-1);//i need to get the previous node
+    
+    if(current){
+    <div class="comment">//{val:10, next: {val:11, next:{val:12,next:null} } }</div>
+    var temp = current.next;
+    current.next = newNode;
+    newNode.next = temp;
+    this.length++;
+    console.log("New Node Inserted ====> ");
+    }
+    
+    }
+    
+    
+    
+    get(index){
+    
+    if(!this.head){return null}
+    if(index >= this.length || index === undefined || index < 0){return null}
+    var count = 0;
+    var current = this.head;
+    
+    while(current){
+    if(count === index){return current;}
+    current = current.next;
+    count++;
+    }
+    
+    }
+    
+    set(index,value){
+    var current = this.get(index);
+    if(!current){return null}
+    if(current){
+    current.val = value;
+    }
+    }
+    
+    
+    shift(){
+    <div class="comment">// var obj = {length:3 , head: {val:10, next: {val:11, next:{val:12,next:null} } }, tail: {val:12,next:null}};
+    // var obj = {length:2 , head:{val:11 , next:{val:12, next:null}} ,tail:{val:12,next:null}}
+    // var obj = {length:1 , head:{val:12,next:null} , tail:{val:12,next:null}}</div>
+    
+    if(!this.head){return null}
+    if(this.head){
+    this.head = this.head.next;
+    this.length--;
+    }
+    
+    }
+    
+    unshift(val){
+    
+    var node = new Node(val);
+    if(!this.head){
+    this.head = node;
+    this.tail= node
+    }else{
+    node.next = this.head;
+    this.head = node;
+    }
+    this.length++;
+    
+    }
+    
+    reverse(){
+    
+        var node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+        var next;
+        var prev = null;
+        for(var i=0;i < this.length; i++){
+            next = node.next
+            node.next = prev;
+            prev  = node;
+            node = next;
+        }
+    }
+   
+<br/>
+} 
+
+var aSll =<span class="functionCall"> new SinglyLinkedList();</span>
+<span class="functionCall">aSll.push(10);</span>
+<span class="functionCall">aSll.push(11);</span>
+<span class="functionCall">aSll.push(12);</span>
+<span class="functionCall">aSll.push(13);</span>
+<span class="functionCall">aSll.push(14);</span>
+</pre>
+</div>
+
+
+
+<div>
+<h3>someRecursive</h3>
+<pre>
+function <span>someRecursive(array, cb)</span> {
+<br/>
+let slizzedArray = [...array];
+if (slizzedArray.length === 0) {
+    return false;
+}
+if (slizzedArray.length !== 0) {
+    if (cb(slizzedArray[0]) === true) {
+        return true;
+    }
+    slizzedArray = slizzedArray.slice(1);
+}
+return someRecursive(slizzedArray, cb);
+<br/>
+} 
+
+function <span>isOddfun(value)</span> {
+    <br/>
+    return value % 2 !== 0;
+    <br/>
+}
+<span class="functionCall">someRecursive([4, 6, 8], val => val > 10);<div class="comment">// false</div></span>
+<div class="comment">// someRecursive([1,2,3,4], isOddfun) // true
+// someRecursive([4,6,8,9],isOddfun) // true
+// someRecursive([4,6,8], isOddfun) // false
+</div>
+</pre>
+</div>
+
+
+
+<div>
+<h3>SortedArraySearchDivideAndConquer</h3>
+<pre>
+<div class="comment">
+//sorted array of integers, write a function called search, //which retuns index if found
+//Basically its a Binary search ,we will select a random number in between from array and the Game Begin...
+// Time complexity would be O(logN)
+// function Search(array = [1,2,3,5,6,7],7){
+// }
+//array.length // will be 6 
+// select a random number which will divide the array in equal part
+//1) One way is to take the initial index of array which is 0 ,and the array.length-1 , the last index and , divide by two
+//2) if the array length  is odd then , (0+6)/2 = 3
+//3) if the length is odd , then , (0+5)/2  = 2.5 = Math.floor(2.5)=2 OR Math.ceil(2.5)=3 
+</div>  
+
+
+function <span>BinarySearchOnSortedArray(array = [1, 2, 3, 5, 6, 7, 34, 35, 36, 70, 80, 90, 100], value = 5)</span> {
+<br/>
+var initialIndex = 0;
+var lastIndex = array.length - 1;
+
+while (true && initialIndex <= lastIndex) {
+    //as the array is sorted 
+    var median = Math.floor((initialIndex + lastIndex) / 2);
+    if (array[median] === value) {
+        return median
+    }
+
+    if (array[median] < value) {
+
+        median++;
+        initialIndex = median;
+
+    } else {
+        median--;
+        lastIndex = median;
+
+    }
+
+}
+return -1;
+<br/>
+} 
+<span class="functionCall">BinarySearchOnSortedArray() </span><div class="comment">// Time Complexity is Log(N);</div>
+</pre>
+</div>
+
+
+<div>
+<h3>StringAndReturnCount</h3>
+<pre>
+function <span>strFun(str)</span> {
+<br/>
+<div class="comment">//var obj = {r:0,a:0,j:0,e:0,s:0,h:0};// i need to make an object, with str as input</div>
+var obj = {};
+str = str.toLowerCase()
+<div class="comment">//Object made</div>
+for (var i = 0; i < str.length; i++) {
+    if (str[i] !== " " && str[i] !== "!") {
+        obj[str[i]] = 0;
+    }
+}
+
+<div class="comment">// incrment the count</div>
+for (var i = 0; i < str.length; i++) {
+    <div class="comment">//  obj[str[i]]=0;// yeh s ko baar baar reassign kar deraha hai to 0;</div>
+    if (obj.hasOwnProperty(str[i])) {
+        obj[str[i]]++;
+    }
+}
+return obj;
+<br/>
+} 
+
+<span class="functionCall">strFun("AVCf !")</span>
+</pre>
+</div>
+
+
+<div>
+<h3>SumOfArray</h3>
+<pre>
+function <span>SumOfArray(array)</span> {
+<br/>
+var sumTotalArray = Array(array.length);
+    for (var i = 0; i < array.length; i++) {
+
+        var subTotal = 0;
+        for (var j = 0; j <= i; j++) {
+            let yu = 0;
+            subTotal = subTotal + array[j]
+        }
+        sumTotalArray[i] = subTotal;
+
+    }
+return sumTotalArray;
+<br/>
+} 
+
+<span class="functionCall">SumOfArray([10, 11, 12, 13, 14])</span>
+</pre>
+</div>
+
+
+<div>
+<h3>sumZero</h3>
+<pre>
+function <span>sumZero(arr) </span> {
+<br/>
+var start = 0
+    var end = array.length - 1
+
+    while (array[start] + array[end] !== 0) {
+        if (array[start] + array[end] > 0) {
+            end = end - 1; <div class="comment">//end--;</div>
+        } else {
+
+            start = start + 1 <div class="comment">//start++;</div>
+        }
+    }
+
+    return [].concat(array[start], array[end]);
+<br/>
+} 
+<div>var array = [-4, -3, -2, -1, 0, 11, 22, 5];</div>
+<span class="functionCall">sumZero(array);</span>
+<div class="separation">-------</div>
+function <span>SumZeroRefactor(arr)</span> {
+<br/>
+var left = 0;
+var right = arr.length - 1
+while (left < right) {
+    var sum = arr[left] + arr[right];
+    if (sum === 0) {
+        return [arr[left], arr[right]]
+    } else if (sum > 0) {
+        right--;
+    }
+    left++
+}
+<br/>
+} 
+<span class="functionCall">SumZeroRefactor(array);</span>
+</div>
+
+
+
+<div>
+<h3>SumZeroFrequencyPointerTwo</h3>
+<pre>
+function <span>sumZero(sortedArray)</span> {
+<br/>
+for (var i = 0; i < sortedArray.length; i++) {
+    for (var j = i + 1; j < sortedArray.length; j++) {
+        console.log(i, j)
+        <div class="comment">// 1) adding the same number togther , will never give me sum equal to zero</div>
+        <div class="comment">// 2) -3+-2 is same as -2+-3 , so no need of adding aagin once again</div>
+        var sum = sortedArray[i] + sortedArray[j];
+        if (sum == 0) {
+            <div class="comment">// return [sortedArray[i],sortedArray[j]];</div>
+            return [].concat(sortedArray[i], sortedArray[j])
+        }
+    }
+}
+return undefined;
+<br/>
+} 
+<span class="functionCall">sumZero([2, 1, 0, 3, -2])</span>    
+<div class="separation">-------</div>
+function <span>sumZero(sortedArray = [-3, -2, -1, 0, 1, 2, 3])</span> {
+    <br/>
+    for (var i = 0; i < sortedArray.length; i++) {
+
+        for (var j = sortedArray.length - 1; j > i; j--) {
+
+            var sum = sortedArray[i] + sortedArray[j]
+            if (sum === 0) {
+                return [sortedArray[i], sortedArray[j]]
+            }
+        }
+
+    }
+    return false;
+    <br/>
+    } 
+<span class="functionCall">sumZero([-2, 0, 2, 3])</span>    
+<div class="separation">-------</div>
+function <span>sumZero(sortedArray = [-3, -2, -1, 0, 11, 12, 13])</span> {
+    <br/>
+    var pointerOne = 0;
+    var pointerTwo = sortedArray.length - 1;
+    var sum;
+    while (true && (pointerOne !== pointerTwo)) {
+
+        sum = sortedArray[pointerOne] + sortedArray[pointerTwo];
+        if (sum > 0) { <div class="comment">// meanans it a positive</div>
+            pointerTwo--;
+        } else if (sum < 0) {
+            pointerOne++;
+        } else {
+            return [sortedArray[pointerOne], sortedArray[pointerTwo]];
+        }
+    }
+    return undefined
+    <br/>
+    } 
+<span class="functionCall">sumZero([-3, -2, 0, 1, 2, 13])</span>
+</pre>
+</div>
+
+
+
+<div>
+<h3>FibonacciSeriesRecursiveWay</h3>
+<pre>
+function <span>FibonacciSeriesRecursiveWay(n)</span> {
+<br/>
+if (n === 0 || n === 1) {
+    return 1;
+}
+return FibonacciSeriesRecursiveWay(n - 1) + FibonacciSeriesRecursiveWay(n - 2)
+<br/>
+} 
+<span class="functionCall">FibonacciSeriesRecursiveWay(4);</span>
+</pre>
+</div>
+
+
+<div>
+<h3>fib</h3>
+<pre>
+function <span>fib(n)</span> {
+<br/>
+let a = [];
+    a[0] = 1;
+    a[1] = 1;
+    for (var i = 2; i < 50; i++) {
+        a[i] = a[i - 2] + a[i - 1];
+    }
+    <div class="comment"> //console.log("the value of a ",a), 1 1 2 3</div>
+    <div class="comment">// a[2] = a[0]+a[1] // a[n] = a[n-2]+a[n-1]</div>
+    <div class="comment">// a[3] = a[1]+a[2]</div>
+    return a[n - 1];
+<br/>
+} 
+<span class="functionCall">fib(10);</span>
+</pre>
+</div>
+
+
+<div>
+<h3>recursiveRange</h3>
+<pre>
+function <span>recursiveRange(n)</span> {
+<br/>
+if (n === 0) return 0;
+    return n + recursiveRange(n--);
+<br/>
+} 
+<span class="functionCall">recursiveRange(5)</span>
+</pre>
+</div>
+
+
+
+<div>
+<h3>reverseStringRecusriveWay</h3>
+<pre>
+function <span>reverse(stringValue)</span> {
+<br/>
+var oneShort = stringValue;
+
+    if (oneShort.length === 0) {
+        console.log("hey i am here")
+        return "";
+    }
+
+    var lastValue = oneShort.substr((oneShort.length - 1), 1);
+    oneShort = oneShort.substr(0, (oneShort.length - 1))
+    return lastValue + reverse(oneShort)
+<br/>
+} 
+<div>var stringValueOut = "rajesh"</div>
+<span class="functionCall">reverse(stringValueOut)</span>
+</pre>
+</div>
+
+
+<div>
+<h3>maxSubarraySum</h3>
+<pre>
+function <span>maxSubarraySum(array = [-1, -2, -5, -2, -8, -1, -5], n = 3)</span> {
+<br/>
+var i = 0;
+    var j = n;
+    var subArray;
+    var tempSum = 0;
+    var maxSum = -Infinity; //(Important)
+    if (n > array.length) {
+        return null
+    }
+
+    while (j <= array.length) {
+
+        subArray = array.slice(i, j);
+
+        console.log("subArray", subArray);
+
+        for (var k = 0; k < subArray.length; k++) {
+
+            tempSum += subArray[k];
+        }
+        console.log("tempSum", tempSum)
+        if (maxSum < tempSum) {
+            maxSum = tempSum;
+        }
+        tempSum = 0;
+        i++;
+        j++;
+
+    }
+
+    return maxSum;
+<br/>
+} 
+<span class="functionCall">maxSubarraySum()</span>
+<div class="separation">-------</div>
+function <span>maxSubarraySum(array = [1, 2, 5, 2, 8, 1, 5], n = 3)</span> {
+    <br/>
+    var sum = 0;
+    var max = -Infinity;
+    if (n > array.length) {
+        return null
+    }
+    for (var i = 0; i <= array.length - n; i++) {
+
+        for (var j = i; j < (i + n); j++) {
+            sum += array[j];
+        }
+
+        if (max < sum) {
+            max = sum;
+        }
+        sum = 0;
+    }
+    return max;
+    <br/>
+    } 
+<div class="separation">-------</div>
+function <span>maxSubarraySum(array = [1, 2, 5, 2, 8, 1, 5], n = 3)</span> {
+<br/>
+var sum = 0;
+    var max = -Infinity;
+    if (n > array.length) {
+        return null
+    }
+    for (var i = 0; i <= array.length - n; i++) {
+
+        <div class="comment">
+        //for(var j= i ; j< (i+n) ; j++){
+        //sum += array[j];
+        //}</div>
+
+        <div class="comment">//On more way of looking the for loop </div>
+        for (var j = 0; j < n; j++) {
+            sum += array[i + j];
+        }
+
+        if (max < sum) {
+            max = sum;
+        }
+        sum = 0;
+    }
+    return max;
+<br/>
+} 
+<span class="functionCall">maxSubarraySum([-4, -2, -1, -6], 2)</span>
+<div class="separation">-------</div>
+<div>// Sliding window</div>
+function <span>maxSubarraySum(array = [1, 2, 5, 2, 8, 1, 5], n = 4)</span> {
+    <br/>
+    var sum = 0;
+    var max;
+
+    if (n > array.length) {
+        return null
+    }
+    for (var i = 0; i < n; i++) {
+        sum += array[i]
+    }
+    <div class="comment">// Now we nee dto slide , measn subtract the array[0] elemnt and add array[3]
+    // then again , subtract the array[1] and add the array[4];</div>
+    max = sum;
+    for (var i = 0; i <= array.length - n; i++) {
+        <div class="comment">// this is giving the effect of sliding window protocol or lgorithmic
+
+        // sum -= array[i];
+        // sum += array[i+n-1];</div>
+        sum = sum - array[i] + array[i + n - 1]; //(we can combine the above two statement )
+        if (max < sum) {
+            max = sum;
+        }
+
+    }
+
+    return max;
+    <br/>
+    } 
+    <span class="functionCall">maxSubarraySum([-1, -2, -3, -4, -2], 3) </span><div class="comment">//-6</div>
+    <span class="functionCall">maxSubarraySum([-4, -2, -1, -6], 2)</span>
+    <span class="functionCall">maxSubarraySum([], 4) </span><div class="comment">// return null;</div>
+    <span class="functionCall">maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4) </span><div class="comment">// return 17</div>
+    <span class="functionCall">maxSubarraySum([4, 2, 1, 6], 1)</span><div class="comment">// return 6</div>
+    <span class="functionCall">maxSubarraySum([4, 2, 1, 6, 2], 4) </span><div class="comment">// return 13</div>
+
+    <span class="functionCall">maxSubarraySum([1, 4, 2, 10, 23, 3, 1, 0, 20], 4);</span>
+<div class="comment">// maxSubarraySum([-3,4,0,-2,6,-1],2);
+// maxSubarraySum([100,200,300,400],2);
+// maxSubarraySum([2,3],3); //null</div>
+<div class="separation">-------</div>
+//Sliding window
+function <span>maxSubarraySum(arr, num)</span> {
+    <br/>
+    if (num > arr.length) {
+        return null
+    }
+    var j = num - 1;
+    var i = 0;
+    var max = 0;
+    debugger;
+    while (j <= arr.length - 1) {
+        debugger;
+        // add the array elemnt from 0,1
+        var sum = addingValue(i, j, arr);
+
+        if (max < sum) {
+            max = sum;
+        }
+
+        i++;
+
+        j++;
+
+    }
+    return max;
+    <br/>
+    } 
+    <div class="separation">-------</div>
+    function <span>addingValue(i, j, arr) </span> {
+        <br/>
+        var sum = 0;
+    for (var k = i; k <= j; k++) {
+        sum += arr[k]
+    }
+    return sum;
+        <br/>
+        } 
+    <div class="separation">-------</div>   
+    function <span>maxSubarraySum(arr, num)</span> {
+        <br/>
+        var sum = 0;
+    var max;
+    for (var i = 0; i <= num - 1; i++) {
+        sum += arr[i]
+    }
+    max = sum;
+
+    <div class="comment">// sum = sum-arr[0]; sum = sum -arr[i];
+    // sum = sum+arr[n]; sum = sum +arr[i+n];
+
+    // sum = sum - arr[0+1];
+    // sum = sum +arr[n+1];
+
+    // sum = sum -arr[0+1+1];
+    // sum = sum + arr[n+1+1];</div>
+
+    for (var i = 0; i < arr.length - num; i++) {
+        sum = sum - arr[i];
+        sum = sum + arr[i + num];
+
+        if (max < sum) {
+            max = sum;
+        }
+
+    }
+
+    return max;
+        <br/>
+        }
+        <div class="comment">// maxSubarraySum([100,200,300,400],2);</div>
+        <span class="functionCall">maxSubarraySum([1, 4, 2, 10, 23, 3, 1, 0, 20], 4);</span>
+</pre>
+</div>
+
+
+<!-- Template Start -->
+<!-- 
 <div>
 <h3>CountUniqueValues</h3>
 <pre>
@@ -524,8 +1379,9 @@ function <span>countUniqueValue(sortedArray = [1, 1, 2])</span> {
 <div class="separation">-------</div>
 <span class="functionCall"></span>
 </pre>
-</div>
+</div> -->
 
+<!-- Template  End-->
 
 
 
