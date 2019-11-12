@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<div>
+    <h1>Git Essential Data</h1>
+<pre>
+
+===> git init , we can make our directory(folder), initialized as a git project , means , git will track all my changes now.
+
+==> Commit matlab snapshot lena(photo lena)
+==> When we commit , we need to tell git , who is commiting , as we are commiting from our local, so we need to set our info like email.
+we can do that by:-
+
+git config --global user.name "Rajesh Singh" // yeh mera "name" config hogaya yaha pe.
+git config --global user.email "rajkesh007@gmail.com" // this configured my email
+
+==> I can see the above configuration in git by 
+git config --list (It will show all the configuration)
+OR, individual , we can write this
+git config --global user.name OR git config user.name
+git config --global user.email OR git config user.email
+
+<h2>GIT - THREE STAGE ARCHITECTURE.</h2>
+==>><h1>local operations</h1>
+Working Directory                        StagingArea                                  git directory(repository)(Very important)(.git)
+                                Those files , i want to go in the                   git repo is a (.git, folder), we have one hidden folder,         
+                                next commit.                                        we have our project in this.
+                                Stage means , want to go in the next commit         (.git) folder will compress all my project and keep, 
+                                if i dont want the file to go in commit             with him, and the responsibility of git ,according to 
+                                , then dont put in staging area                     our command , will give, the proper version, and put in our
+                                After Stage we can commit , measn we take the       working directly.
+                                Snapshot, photo and freeze.
+
+
+
+Will take snapshot of my folder , means , we will freeze the , exsiting look of my project and save., lets say that as V1(version), we will say 
+it a commit. c1-working V1.
+
+
+</pre>
+
+
+
+</div>
+
+</body>
+</html>
