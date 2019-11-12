@@ -7,6 +7,7 @@
 <pre>
 
 ===> git init , we can make our directory(folder), initialized as a git project , means , git will track all my changes now.
+by this we are saying our local project is now a git respository., we are making our local project as a git respository
 
 ==> Commit matlab snapshot lena(photo lena)
 ==> When we commit , we need to tell git , who is commiting , as we are commiting from our local, so we need to set our info like email.
@@ -23,7 +24,7 @@ git config --global user.email OR git config user.email
 
 <h2>GIT - THREE STAGE ARCHITECTURE.</h2>
 ==>><h1>local operations</h1>
-Working Directory                        StagingArea                                  git directory(repository)(Very important)(.git)
+Working Directory                        StagingArea(git add)                             git directory(repository)(Very important)(.git)
                                 Those files , i want to go in the                   git repo is a (.git, folder), we have one hidden folder,         
                                 next commit.                                        we have our project in this.
                                 Stage means , want to go in the next commit         (.git) folder will compress all my project and keep, 
@@ -37,7 +38,9 @@ Working Directory                        StagingArea                            
 Will take snapshot of my folder , means , we will freeze the , exsiting look of my project and save., lets say that as V1(version), we will say 
 it a commit. c1-working V1.
 
-
+Important Command
+git reset HEAD fileName  (this command will take teh respective file from stage area to working Directory , means , remove from the staging area)
+git commit -m "message write" (this will create a snapshot, will take a photo of the files in commit or whatever in the commit)
 </pre>
 
 
