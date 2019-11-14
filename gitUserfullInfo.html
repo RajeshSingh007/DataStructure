@@ -48,6 +48,55 @@ Your branch is up-to-date with 'origin/master'.
 
 
 
+SEETING UP THE GIT REPO IN GITHUB AND GIVING ACCES RIGHT TO OUR PC
+
+git remote add origin git@github.com:CodewithHarry/GitTutorialDemo.git //it means,
+// git remote add kardo ,ek URL ko(git@github.com:CodewithHarry/GitTutorialDemo.git) , jiska naam 'origin' rakh raha hu.
+// this is the URL name or the website name , which we saying it as origin(we could give any name , but its a global practice to keep the name as
+// 'orgin')
+// we are keeping the name to URL git@github.com:CodewithHarry/GitTutorialDemo.git as orgin, basicaly this is our git repository , which is 
+// hosted remotely to 'github', GitTutorialDemo.git this is our repository name, we have kept the name as 'origin' and humne
+// isko as a remote add kardiya.
+
+so when we do git remote, we will get origin
+
+git remote
+    orign
+
+git remote -v   
+    origin git@github.com:CodewithHarry/GitTutorialDemo.git (fetch)
+    origin git@github.com:CodewithHarry/GitTutorialDemo.git (push) 
+
+// Dont have permsion to push to 'CodewithHarry/GitTutorialDemo.git' respository.
+git push -u origin master
+    ERROR: Permision to CodewithHarry/GitTutorialDemo.git denied to haris989
+    fatal: could not read from remote repository
+
+    please make sure you have correct access rights and the repository exists.
+
+How to get permission.
+settings -> SSH and GPG keys ->  New SSH key -> Title(Harry personal computer(it could be any name , my personal PC name))
+google SSH key github->steps
+//https://help.github.com/en/enterprise/2.17/user/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+    ssh-keygen -t rsa -b 4096 -C "rajkesh007@gmail.com"
+    y, and enter->enter
+
+    // ensure this is running
+    eval $(ssh-agent -s)
+        Agent pid someNumber
+    ssh-add -K ~/.ssh/id_rsa  // ssh private key ko hum aapne ssh-agent mein add karege, we will add , the ssh private key in ssh-agent.
+
+    tail ~/.ssh/id_rsa.pub
+        copy the output ,which is a key and paste to settings -> SSH and GPG keys ->  New SSH key -> key(paste here)->click on Add SSH Key
+
+git push -u origin master
+    // now we will able to push our changes to remote repo in github, as i got the access. 
+
+
+
+
+
+
 
 </pre>
 
