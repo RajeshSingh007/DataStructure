@@ -139,7 +139,26 @@ when ever , we switch branch , make sure, you have , commited the changes.
 git merge branchName (be in the branch , on which , we need to merge , from the different branch)
 
 HEAD(current changes)
-git status
+
+'git add index.html' this commond use to mark the merge conflict as resolved.
+
+//BRANCH MANAGEMENT
+git branch is not expensive , it will save the new changes and , create a pointer , which points to the previous commit.
+
+//info related to branch last commit , commitHashName and commitMessage
+git branch -v
+    master commitHash(6a4096f) commitMessgae
+
+git branch --merged (branches which we have already merged, by this info , we can delete all those branches which is merged)
+git branch --no-merged  (not merged branches , so we can wisley delete or later merge , than delete)  
+
+// Deleting branches
+git branch -d branchName (before deleting , gives error , that you have not merged, git will understand that, kahi aaplog , accedentially tho delete nahi kar raha hai,as this branch is not merged)
+still you want to delete ? then replace 'd' with 'D'.
+git branch -D branchName ==> no error , and branches get deleted
+
+// <<<<<<<<< (conflict resolution markers)
+
 
 
 
