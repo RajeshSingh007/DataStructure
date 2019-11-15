@@ -120,11 +120,29 @@ and run 'git commit --amend', this will open a vi editor , we will ':wq' and hit
 no need to create a new commit , expilicitly
 
 
-// DISCARD CHANGES IN WORKING DIRECTORY
+// DISCARD CHANGES IN WORKING DIRECTORY (DANGEROUS USE WISELY)
 git checkout -- fileName 
-so this command will disacrd all the new changes , which i have made,and take me to the previous commit. use carefully.
+so this command will disacrd all the new changes in working directory , which i have made,and take me to the previous commit. use carefully.
+
+// SKIPPING STAGING AREA, IT WILL DO THE AUTOMATICALLY STAGE 
+git commit -a -m "messgaeName" // -a will do the staging for us and and the commit will happen
 
 // CREATING BRANCHES AND SWITCHING IN GIT
+git checkout -b Develop // it measn , nai (new) branch ,banado, by saying -b aur , usepe leke jao, that is checkout means., it will have all the content as of master,Develop(name of the branch) :)
+git checkout master(switching branch from 'Develop' to 'master')
+git checkout Develop // chaneged to branch Develop
+git branch //list all branch , and tell us , in what branch we are in.
+.gitignore file , ko , koi farak nahi padata , when we switch ,change gears between , the branches. (IMPORTAN), also the empty folders , git will ignore.
+
+// BRANCHING AND MERGING
+
+
+
+
+
+
+
+
 
 
 
