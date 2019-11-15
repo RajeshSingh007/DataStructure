@@ -95,6 +95,23 @@ git push -u origin master
 
 
 
+//ALIAS IN GIT(WE DO WHEN WE OFTEN RUN SOME COMMOND OR SOME BIG LINE CODE :P)
+
+ALIAS means write small command which works for the big command.
+like wrting git@github.com:CodewithHarry/GitTutorialDemo.git again and again , we will understand it as origin(alias for git@github.com:CodewithHarry/GitTutorialDemo.git)
+
+like i am wrting 'git status', i want to write 'git st' , which willbe understood by git as git status , who shall i achieve this?
+
+git config --global alias.st status // i told to git , that , when ever i write , 'git st' , it should understand as 'git status'
+git config --global alias.ci commit
+git config --global alias.unstage 'restore --staged --'
+git config --global alias.last 'log -p -1' // git last , is understood as git log -p -1 (last commit will be displayed)
+
+git st (':)') same understood as git status
+git ci (':)') same understood as git commit
+git unstage fileName // it will unstage , and will come to working directory. this command is same as 'git restore --staged -- fileName', restore --staged -- replace to 'unstage'
+
+
 
 
 
