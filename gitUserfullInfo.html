@@ -112,9 +112,24 @@ git ci (':)') same understood as git commit
 git unstage fileName // it will unstage , and will come to working directory. this command is same as 'git restore --staged -- fileName', restore --staged -- replace to 'unstage'
 
 
+// GIT AMEND (AWESOME)
+so we have staged some changes(means we have added the files in staged, by running the command 'git add .') in git and now we are creating a commit , means , taking a snapshot, a photo, by saying , git commit -m "some messgae",
+now we hit, this command, 'git commit -m "some messgae" ' , so we have our snapshot, but if we need to , put some more changes , and want to go in the commit(we prepared), so we , staged the new changes(add to staging area) ,
+and run 'git commit --amend', this will open a vi editor , we will ':wq' and hit the button , and now , our new changes will go in the commit , AWESOME. 
+
+no need to create a new commit , expilicitly
+
+
+// DISCARD CHANGES IN WORKING DIRECTORY
+git checkout -- fileName 
+so this command will disacrd all the new changes , which i have made,and take me to the previous commit. use carefully.
+
 // CREATING BRANCHES AND SWITCHING IN GIT
-adding line to test
-added new line , i want to go in this commit
+
+
+
+
+
 
 </pre>
 
