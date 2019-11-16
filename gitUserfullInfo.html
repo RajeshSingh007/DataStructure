@@ -142,12 +142,12 @@ HEAD(current changes)
 
 'git add index.html' this commond use to mark the merge conflict as resolved.
 
-//BRANCH MANAGEMENT
+//BRANCH MANAGEMENT AND MERGE CONFLICT DETAIL IMPORTANT
 git branch is not expensive , it will save the new changes and , create a pointer , which points to the previous commit.
 
-//info related to branch last commit , commitHashName and commitMessage
+//info related to  branch(JITANE BHI BRANCHES HONGE, UNKE) last commit , commitHashName and commitMessage
 git branch -v
-    master commitHash(6a4096f) commitMessgae
+    master commitHash(6a4096f) commitMessgae    
 
 git branch --merged (branches which we have already merged, by this info , we can delete all those branches which is merged)
 git branch --no-merged  (not merged branches , so we can wisley delete or later merge , than delete)  
@@ -156,6 +156,19 @@ git branch --no-merged  (not merged branches , so we can wisley delete or later 
 git branch -d branchName (before deleting , gives error , that you have not merged, git will understand that, kahi aaplog , accedentially tho delete nahi kar raha hai,as this branch is not merged)
 still you want to delete ? then replace 'd' with 'D'.
 git branch -D branchName ==> no error , and branches get deleted
+
+when you resolve the merge conflict , git will say , that you have unmerged paths. it measn that git is trying to say , ki aapne , merge resolve tho karliya hai , but add nahi kiya tha , 
+yani ki , usko , mark , nahi kiya han as resolved.(git add is playing different character in case of merge conflict once , we resolve the changes , we need to tell the git , that we are now
+, marking the changes as resolved as 'git add fileName')
+Now the git will say , abhi aapne , conflict fixe kar liye hai , but ,merge nahi kiya. so merge the changes ,by 'git commit -m "commitMessage" '.
+
+git branch --merged
+    mergedBranchName (now you can delete)
+    theBranchInWhichTheMergedHappened
+  
+git branch --no-merged
+    unmergedBranchName (its not merged , you cannot delete , if still you want to delete , then replace smaal d to captital D)   
+
 
 // <<<<<<<<< (conflict resolution markers)
 
