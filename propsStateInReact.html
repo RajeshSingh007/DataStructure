@@ -1,0 +1,124 @@
+props in react are , immutable, that is ,it cannot be changes, if we try to change
+, the react will through the error ,
+
+In functionalComponent
+props.name = "abc", useState Hook
+In class Component
+this.props.name = "abc" , this.state
+
+"Cannot assign  to reac only property of , anyPropsPropertyKey" of object
+
+React component , have to act like pure functions , with respect to there props parameter,
+you cannot change it any cricumstances.
+
+//STATE AND SETSTATE METHOD
+do and dont's for state
+- never modify the state directly , alwz use setState method
+count=0
+setState({count:this.state.count+1}) // "async" call , state is chnage to 1, but console.log(count) , print 0
+console.log(this.state.count)//0 // this will execute after setState({count:this.state.count+1})
+
+
+- in some case we need to , execute some code, only after , state updated, in that case , use the below approach,
+,pass the second paramter as callback , whcih will call ,when state updates.
+
+setState({count:this.state.count+1},()=>{"put your logic here "; this.state.count})
+
+
+
+//VERY IMPORTANT
+////// All the five setCalls are done in the single go(React does this),and the updated value doesnot carry over, between the different calls
+increment(){
+    this.setState({
+        count: this.state.count+1
+    },
+    ()=>{
+        console.log("the callback Value", this.state.count);
+    })
+}
+incrementFive(){ // this fired when , a button clicked
+    this.increment();
+    this.increment();
+    this.increment();
+    this.increment();
+    this.increment();
+}
+
+Solution for very important part
+- when you have to update the state based on , prevState , make sure to pass ,an ,
+function as argument, instead of the regular object., this fucntion han prevState value.
+this.setState((prevState, props)=>{// prevState of the componennt
+return {count:prevState+1} 
+return {count:prevState+props.addValue} //if your state depends on the props aswell , do this
+})
+
+//JSX
+if , else statement dont work inside the JSX,because ,JSX is syntatic sugar , for function call and object constructions.
+render function k andar likho , javascript..
+teranairy approach we can use in JSX.
+
+
+React.createElement('div',null,'Hello Vishwas') same as "<div>Welcome Vishwas</div>" (JSX way)
+"<div>Welcome {props.name}</div>", {props.name} JSX will evaluate the expression {props.name},if we write in "curly braces"
+{props.children}, JSX will evaluate this
+
+render(){
+ if(this.state.isLoggedIn){
+        <div>Welcome Vishwas</div>
+    }else{
+        <div>Welcome Guest</div>
+    }
+}
+
+
+render(){
+    let message;
+    if(this.state.isLoggedIn){
+        message = <div>Welcome Vishwas</div>
+    }else{
+        message = <div>Welcome Guest</div>
+    }
+    return message;
+}
+
+render(){
+    return  this.state.isLoggedIn ? (<div>Welcome Vishwas</div>) : (<div>Welcome Guest</div>) //JSX
+}
+
+render(){
+    return  this.state.isLoggedIn && <div>Welcome Vishwas</div> //JSX    
+}
+
+inJSX {props.anyValue} , this get evaluated in currly brackets
+//Map in JSX
+<div>
+{
+    names.maps((name,idx)=>{ //in JSX, we need to use curly braces, in order to evaluate the javascript expression
+        return <div key={idx}>{name}</div>
+    })
+}
+</div> ORR
+
+const names =['bruse,'clary']
+const nameList = names.map(name => <div>{name}</div>)
+<div>{nameList}</div>
+//IMP
+var objArray = [{name:"raj",age:23},{name:"rak",age:34}]
+objArray.map(n => NamelistCall(n));
+
+function NamelistCall({...arg}){ // check List RENDERING VIDEO
+console.log("arg",arg);
+return `${arg.name} added`
+}
+
+//DESTRUCTURING
+unpack values from arrays, properties from object into ,distinct variables., good for code readability
+var obj = {age:{newAge:34,name:"xyz"},sex:"male"}
+let {age, sex} = obj;
+let {newAge} = obj.age;
+
+var ty = {newAge:34,name:"xyz"}
+let {newAge,name}= ty
+
+// KEY PROPS ARE NOT ACCESIBLE IN CHILD COMPONENT
+https://www.youtube.com/watch?v=n3zrCxB8sj8&list=PLC3y8-rFHvwhI0V5mE9Vu6Nm-nap8EcjV

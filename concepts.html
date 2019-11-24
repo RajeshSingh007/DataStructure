@@ -1,0 +1,67 @@
+// setup the Map Display
+<div id="map"></div>
+
+<!-- new Map(mapElement, config)
+XYZ Map is a map display with support for dynamically changing vector data. -->
+
+window.display = new here.xyz.maps.Map( document.getElementById("map") , {
+
+    zoomLevel : 17,
+    center: {
+        longitude: -122.48024, latitude: 37.77326
+    },
+    // add layers to display
+    layers: [imageLayer] // so basically its a array
+})
+
+// Create data layer with Space provider
+var myLayer = new here.xyz.maps.layers.TileLayer({
+    name: 'mySpaceLayer',
+    min: 14,
+    max: 20,
+    provider: new here.xyz.maps.providers.SpaceProvider ({
+        name:  'SpaceProvider',
+        level: 14,
+        space: 'playground-link',
+        credentials: {
+            access_token: YOUR_ACCESS_TOKEN
+		}
+    })
+
+})
+
+window.display.addLayer(myLayer)
+
+
+// define all the layers and add in the Map.
+
+var imageLayer =  new here.xyz.maps.layers.TileLayer({
+    name: 'Image Layer',
+    min: 1,
+    max: 20,
+    provider: new here.xyz.maps.providers.ImageProvider({
+        name: 'Live Map',
+        url : 'https://{SUBDOMAIN_INT_1_4}.mapcreator.tilehub.api.here.com/tilehub/wv_livemap_bc/png/sat/256/{QUADKEY}?access_token='+YOUR_ACCESS_TOKEN
+    })
+})
+
+// setup the edit engine
+// tu kya mapDisplay dala editor mein , wo editor detect kiya aur use mapDisplay mein as a layed khud ko as a layer add kiya.,
+// so us particlular mapDisplay mein , editing capabilities , uske respective layer k against , desake.
+
+var editor = new here.xyz.maps.editor.Editor( window.display ); 
+<!-- by doing this , its create an editor layer in mapDisplay -->
+<!-- new Editor(display, config)
+Create an instance of the editor which is the main class within maphub maps API, you have to interact with. -->
+
+
+// add link layer to edit engine, make layer editable
+editor.addLayer( linkLayer )
+
+
+
+//WE CAN add the features on the layer
+var AddedLinks = [];
+AddedLinks = linkLayer.addFeature(Links);
+
+

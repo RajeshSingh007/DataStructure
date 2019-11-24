@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+
+<pre>
+
+
+Var inputRef = useRef()
+<input ref={inputRef} />
+Now I have referent to this input field now.
+
+<button onClick={()=>{
+console.log(inputRef.current) //abhi is ko input field ka reference mila , .current to get the current value of the reference, wont cause rerender
+}}
+
+We can useRef to reference , to see , how many times the component renders
+Const renders = useRef(0), let are lots of use case of useRefs.
+Renders.current++;
+
+useRefs behaviour:-
+
+useRef can hold a reference to DOM-Node
+useRef can also be used to store any mutable value.
+The value will persists(continue to exist) , through the re-renders, while also not causing , any additional renders when, its value changes.
+It can be used to create a Generic Container , which can hold a mutable value , similar to instance properties on a class component, this generic Container , does not cause re-renders when the data it stores changes , at the same time , it also , remembers the stored data , even after other state variable caused a re-renders of this component, simple use case , is clearing an interval timer from an event handler.
+
+Custom Hooks we can design in reacts.
+It is encouraged , to build your own hooks ,by extracting , your component logic , into reusable functions.,
+A custom hook is basically a javascript function whose name starts with “use”.
+Custom hooks can also call other hooks if required.
+
+why custom Hooks ?
+share logic - Alternative to HOC's and Render Props
+
+//useState
+const [count,setCount] = useState(0)// initial value of count is set to 0.
+// in JSX
+<button onClick={ ()=>{ return setCount(count+1)}}>count - {count} </button>
+<button onClick={()=>setCount(count+1)}>count-{count}</button>
+
+by convention , the customHooks start from use,
+like useAnyBusinessLoginName , and we can use this business logic , to all , other 
+component ,which on state change , wants to apply the logic(customHookBusiness  Logic)
+
+</pre>
+
+<pre>
+NPX VRS NPM
+    npx is an npm package runner, which gets intsalled , when you installed node,
+    and that is how we are directly  able to run create-react-app without having to install it.
+    NPX takes care for us.
+
+    npm , in npm we install the create-react-app package globally and then use the package 
+    to generate the project, npm install create-react-app -g => create-react-app myApp
+</pre>
+</html>

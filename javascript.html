@@ -1,0 +1,204 @@
+VERYIMP CONCEPT
+var abc = true;
+!abc // it will return false, it will not change the value of 'abc' to 'true' to 'false'
+if do console.log(abc) // it will show "true only"
+
+
+
+var currentbehavior = display.getBehavior();
+
+function pointerDownCallback(){
+    if(currentbehavior.drag){
+        display.removeEventListener("pointerdown",pointerDownCallback)
+        }
+      if(!currentbehavior.drag){
+        console.log("pointerdowncallback called")
+      }
+}
+
+
+function pointerUpCallback(){
+if(currentbehavior.drag){
+    display.removeEventListener("pointerup",pointerUpCallback)
+    }
+    if(!currentbehavior.drag){
+    console.log("pointerupcallback called")
+    }
+        
+}    
+
+display.setBehavior("drag", !currentbehavior.drag); // it will never set the currentbehavior.drag value. if "currentbehavior.drag" is true ,
+!currentbehavior.drag , will not set "currentbehavior.drag" to false;
+
+// update current display behavior in info tag
+	currentbehavior = display.getBehavior(); // by doing this , it will set the value "currentbehavior.drag" to false.
+	if(!currentbehavior.drag){
+      console.log("hiiiiii")
+		display.addEventListener("pointerdown",pointerDownCallback)
+		display.addEventListener("pointerup",pointerUpCallback)
+	}
+
+
+//WINDOW OBJECT
+
+document is a window object , ka subpart , its a key in window object. document is basically , entire html page, and which we call this a DOM , has a tree like structure.
+
+ALERT,PROMPT,CONFIRM
+var ty = alert("abc") // it returns undefined , the console.log(ty) value is undefined
+var ty = prompt("abc") // it returns input data in prompt , input feild, and , return in ty , console.log(ty), will console that value.
+var ty = confirm("sure?")// if we say okay, then it return "true", and if we say cancel, it will return , "false", and that value stored in ty variable
+
+HEIGHT,WIDTH
+var ty = window.innerHeight; // return the inner height of the screen.
+var ty = window.innerWidth; // return the inner width of the screen.
+var ty = outerHeight; // is same as window.outerHeight
+var ty = outerWidth; // is same as window.outerWidth
+
+SCROLL
+var ty = scrollX // gives 0 ,if no scroll performed , along x-axis, if we perform , scrollalong x axis , then ,it start giving some values, depending upon the scroll
+var ty = scrollY // gives 0 ,if no scroll performed , along y-axis, if we perform , scrollalong y axis , then ,it start giving some values, depending upon the scroll
+
+LOCATION
+location.reload() //reload the page
+location.href // returns the url of the website
+location.href = '//codewithharry.com' OR location.href = 'https://codewithharry.com'(recommended way of writting) , and when , i will hit enter, it will take me to the 'https://codewithharry.com'
+location.toString() // return the location in string 
+location.href === location.toString() //return 'true'.
+
+HISTORY
+window.history
+history.length // kitana aage piche ho. 
+history.go() //refresh the page.
+histroy.go(-1) OR history.back() //it will take me , one step back, were i was before.
+histroy.go(1) OR history.forward() //it will take me , one step forward, were i was before.
+
+// DOM AND DOM-MANIPULATION , JAVASCRIPT CAN MANUPULATE THE DOM
+
+div.container (hit enter) <div class="container"></div> 
+div.child*4 (hit enter)
+div.child#idChild (hit enter)<div class="child" id="idChild"></div>
+div.child.red#first OR div#first.c.cnew.cold (hit enter)<div class="child red" id="first"></div> , each div has only one id.
+form:post <form action="" method="post"></form>
+input:text <input type="text" name="" id="">
+
+window.document // it will give me the document ka HTML.
+console.dir(window.document) // it will give you the DOM ka OBJECT., not the HTML way.
+typeof document // return "object" :)
+
+document.all // returns entire html nodes(its an html collections) in an array., actually mein , its not array, cant apply forEach and all., it will return an error.
+document.body
+document.head
+document.forms
+
+IMPORTANT(IMPORTANT)
+document.all return HTMLCollection, it appears as an array, but its not an array, to make it array , 
+Array.from(document.all) // this will return an array, from all the HTML Collection which was getting from document.all , on which we can apply all the array native function call , such as , forEach etc.
+document.links returns HTMLCollection, of all links(<a href="javascript.html">got to javascript</a> />), again we can convert it to array by,
+Array.from(document.links) , and can apply forEach.
+same goes for, 'document.images' and 'document.scripts'
+
+// JAVASCRIPT HTML ELEMENT SELECTORS , TRY ALL THE POSSIBLE PERMUTE AND COMBINATION
+document.all gives the htmlcollection of all the tags, <div></div>// this are tags.
+k class k multiple elements hosakte hai , like "div.className*3".
+1) Single Element SELECTORS
+2) Multiple Element SELECTORS
+
+1) Single Element SELECTORS
+
+  let element = document.getElementById('idName');//Single Element SELECTORS
+  element.className
+  element.childNodes //will return an array of NodeList, on which we can do forEach, no need of converting , Array.from(element.childNodes), to apply forEach.
+  element.parentNode // return the parentNode , a single parentNode.
+  element.style.color = "red" // can cghnage the color with javascript
+  element.innerText = "any Text";
+  element.innerHTML = '<b>any Text</b>';
+
+  var sel = document.querySelector('#myFirst');
+  var sel = document.querySelector('.child'); // child class ka phela element in the DOM ,that we will get , by this statement.
+  var sel = document.querySelector('div'); // first div tag ,html element , we will get, while traversing the DOM
+
+
+2) Multiple Element SELECTORS
+
+let elems = document.getElementsByClassName('container') // returs the HTML collection of all the div starting by className given, we can access those by , [0],[1] etc.
+let ty = elems[0].getElementsByClassName('child'); , first conatiner , k andar , jitani bhi , div with class name , child, wo hume ,mil jayegi.
+
+let ty = document.getElementsByTagName('div') // all the htmlcollection which has ,div tags.
+////TRY 
+var ty = document.querySelectorAll('className')
+
+
+ALTERNATIVE OF , Array.from , is normal for loop of javascript. (IMPORTANT)
+
+// CHILDREN, PARENT AND TRAVERSING THE DOM
+let ty = document.querySelector('.container');
+ty.childNodes // Tricky part, (mostly we dont , want this ,empty space as text etc)
+childNodes would be , array of NodeList, so in this case , the NodeList , will be
+NodeList(15)[text,comment,text,p,text], comment k starting tak, it will treat as text.
+<div class="container">
+  <!-- comment -->
+  <p>paragraph</p>
+</div>
+
+ty.children //(we use this) it will return HTMLCollection as [p], one children , it will ignore, text and comment, as childNodes.
+ty.children[0].nodeName // return p, the paragraph tag.
+ty.children[0].nodeType // return 1, it measn its an element , could be h1,div,p etc
+
+//nodeType
+1. Element
+2. Attribute
+3. TextNode
+8. Comment
+9. document
+10. docType
+
+var container = document.querySelector('div.container');
+container.children // we can traverse , by children property
+
+container.firstChild //it gives the childNodes ka first node., which is a text, a space till the element
+container.firstElementChild // it will return the first element child.
+container.lastChild //it gives the childNodes ka last node.
+container.lastElementChild // it will return the last element child.
+container.childElementCount // returs the child element count.
+
+container.firstElementChild.parentNode
+container.firstElementChild.nextSibling //#text, space ,commment dene lagega
+container.firstElementChild.nextElementSibling
+
+
+//CREATING, REMOVING AND REPLACING ELEMENT
+var element = document.createElement('li');
+element.className = "childul";
+element.id = "createdLi";
+element.innerText = "someValue"; OR, let text = document.createTextNode('sdfsdfs') element.appendChild(text);
+element.setAttribute("title","myTitle"); // <li class="childul" id="createdLi" title="myTitle"></li>
+
+let ul = document.querySelector('ul.this'); // this will return the first ul element
+ul.appendChild(element); // dynamically added to DOM
+
+REPLACE
+let elem2 = document.createElement('h3');
+elem2.id = "elem2Id";
+elem2.className = "elem2ClassName";
+var tNode = document.createTextNode("this is a created node for elem2");
+elem2.appendChild(tNode) ///<h3 id="elem2Id" class="elem2ClassName">this is a created node for elem2</h3>
+
+*replaceWith
+element.replaceWith(elem2); ///take the elemnt ,which you want to replace with.
+
+*replaceChild, removeChild
+let myul = document.getElementById('myul');
+myul.replaceChild(newElement, document.getElementById('fui'));//document.getElementById('fui') should be the child of myul, document.getElementById('fui') , isko replace kardiya ,new elmentse.
+myul.removeChild(document.getElementById('lui'));
+
+let pr = elem2.getAttribue('id'), return the id value of the html element.
+let pr = elem2.hasAttribute('id'), retunr true., retunr boolena
+let pr = elem2.removeAttribute('id') , remove the id attribute from the html element
+
+//EVENTS
+e.offsetX , element k relative value dega, elemnt k relative kitana dur click kiya, on x-axis.
+e.offsetY , element k relative value dega, elemnt k relative kitana dur click kiya, on y-axis., element k upar click karege tho ,0 aayega, or -0
+
+e.clientX , browser window k relative , x ka vlaue deta hai..
+e.clientY , browser window k relative , y ka vlaue deta hai..
+
